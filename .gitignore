@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 # 绝对不要上传 API Key 等敏感配置
 config.json
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -220,4 +218,3 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
->>>>>>> b248245cf9b3ca068e5a5e3d650aa3d1badf9bba

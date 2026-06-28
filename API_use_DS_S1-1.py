@@ -1,3 +1,5 @@
+# 学习使用LLM API 完成对话
+
 import os
 import json
 from openai import OpenAI

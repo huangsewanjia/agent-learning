@@ -4,7 +4,8 @@ import os
 import json
 from openai import OpenAI
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__),"config.json")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+CONFIG_PATH = os.path.join(ROOT, "config.json")
 
 try:
     with open(CONFIG_PATH,"r",encoding="utf-8") as f:
@@ -13,7 +14,7 @@ try:
 except FileNotFoundError:
     raise FileNotFoundError(
        f"❌ 未找到配置文件: {CONFIG_PATH}\n"
-       "请在脚本同级目录创建 config.json，格式参考 README"
+        f"请在项目根目录创建 config.json（可复制 config.example.json），详见 README"
     )
 
 

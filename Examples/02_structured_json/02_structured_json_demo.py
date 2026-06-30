@@ -5,7 +5,8 @@ import json
 from openai import OpenAI
 from utils.response_parser import parse_agent_response
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__),"config.json")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+CONFIG_PATH = os.path.join(ROOT, "config.json")
 
 try:
     with open(CONFIG_PATH,"r",encoding="utf-8") as f:
@@ -13,8 +14,8 @@ try:
 
 except FileNotFoundError:
     raise FileNotFoundError(
-       f"❌ 未找到配置文件: {CONFIG_PATH}\n"
-       "请在脚本同级目录创建 config.json，格式参考 README"
+        f"❌ 未找到配置文件: {CONFIG_PATH}\n"
+        f"请在项目根目录创建 config.json（可复制 config.example.json），详见 README"
     )
 
 
@@ -76,7 +77,6 @@ for attempt in range(MAX_RETRIES):
 
     correction_msg=(
         f"你上一次输出的 JSON 有以下问题：{result['message']}\n"
-        f"你的原始输出是：{result['raw_content']}\n"
         f"请根据以上错误信息修正后，重新输出合法的 JSON。"
     )
 

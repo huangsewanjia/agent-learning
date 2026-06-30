@@ -5,15 +5,16 @@ from tools import TOOLS, TOOL_FUNCTIONS
 from openai import OpenAI
 
 # ================= 配置加载 =================
-CONFIG_PATH=os.path.join(os.path.dirname(__file__),"config.json")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+CONFIG_PATH = os.path.join(ROOT, "config.json")
 
 try:
     with open(CONFIG_PATH,'r',encoding='utf-8') as f:
         config=json.load(f)
 except FileNotFoundError:
     raise FileNotFoundError(
-        f"没找到目标文件\n"
-        "请在同级下创建config.json文件"
+        f"❌ 未找到配置文件: {CONFIG_PATH}\n"
+        f"请在项目根目录创建 config.json（可复制 config.example.json），详见 README"
     )
 
 api_key = config.get("deepseek_api_key")
@@ -27,7 +28,7 @@ client=OpenAI(
 )
 
 # ================= Agent 核心循环 =================
-messages = [{"role": "user", "content": "计算 (12+8)*3.5"}]
+messages = [{"role": "user", "content": "阅读'五问理解'文件，总结这个文章的内容"}] # 发现带上后缀会更方便AI的定位，
 print(f"User>\t {messages[0]['content']}")
 
 while True:
